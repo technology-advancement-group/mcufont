@@ -2,11 +2,13 @@
 MCUFONT = ../encoder/mcufont
 
 # Names of fonts to process
-FONTS = DejaVuSans12 DejaVuSans12bw DejaVuSerif16 DejaVuSerif32 \
-	fixed_5x8 fixed_7x14 fixed_10x20 DejaVuSans12bw_bwfont
+FONTS = consolab15 \
+	consola10 consola15 consola20 consola25 consola30 consola40 \
+	cour13 cour14 \
+	verdana25
 
-# Characters to include in the fonts
-CHARS = 0-255 0x2010-0x2015
+# Characters to include in the fonts ' '..'~'
+CHARS = 20-126
 
 all: $(FONTS:=.c) $(FONTS:=.dat) fonts.h
 
@@ -19,32 +21,53 @@ fonts.h: $(FONTS:=.c)
 %.c: %.dat $(MCUFONT)
 	$(MCUFONT) rlefont_export $<
 
-fixed_5x8.c: fixed_5x8.dat $(MCUFONT)
-	$(MCUFONT) bwfont_export $<
-
-DejaVuSans12bw_bwfont.c: DejaVuSans12bw_bwfont.dat $(MCUFONT)
-	$(MCUFONT) bwfont_export $<
-
-DejaVuSans12bw_bwfont.dat: DejaVuSans12bw.dat
-	cp $< $@
-	
-DejaVuSans12.dat: DejaVuSans.ttf
-	$(MCUFONT) import_ttf $< 12
+consolab15.dat: consolab.ttf
+	$(MCUFONT) import_ttf $< 15
 	$(MCUFONT) filter $@ $(CHARS)
 	$(MCUFONT) rlefont_optimize $@ 50
 
-DejaVuSans12bw.dat: DejaVuSans.ttf
-	$(MCUFONT) import_ttf $< 12 bw
+consola10.dat: consola.ttf
+	$(MCUFONT) import_ttf $< 10
 	$(MCUFONT) filter $@ $(CHARS)
 	$(MCUFONT) rlefont_optimize $@ 50
 
-DejaVuSerif16.dat: DejaVuSerif.ttf
-	$(MCUFONT) import_ttf $< 16
+consola15.dat: consola.ttf
+	$(MCUFONT) import_ttf $< 15
 	$(MCUFONT) filter $@ $(CHARS)
 	$(MCUFONT) rlefont_optimize $@ 50
 
-DejaVuSerif32.dat: DejaVuSerif.ttf
-	$(MCUFONT) import_ttf $< 32
+consola20.dat: consola.ttf
+	$(MCUFONT) import_ttf $< 20
+	$(MCUFONT) filter $@ $(CHARS)
+	$(MCUFONT) rlefont_optimize $@ 50
+
+consola25.dat: consola.ttf
+	$(MCUFONT) import_ttf $< 25
+	$(MCUFONT) filter $@ $(CHARS)
+	$(MCUFONT) rlefont_optimize $@ 50
+
+consola30.dat: consola.ttf
+	$(MCUFONT) import_ttf $< 30
+	$(MCUFONT) filter $@ $(CHARS)
+	$(MCUFONT) rlefont_optimize $@ 50
+
+consola40.dat: consola.ttf
+	$(MCUFONT) import_ttf $< 40
+	$(MCUFONT) filter $@ $(CHARS)
+	$(MCUFONT) rlefont_optimize $@ 50
+
+cour13.dat: cour.ttf
+	$(MCUFONT) import_ttf $< 13
+	$(MCUFONT) filter $@ $(CHARS)
+	$(MCUFONT) rlefont_optimize $@ 50
+
+cour14.dat: cour.ttf
+	$(MCUFONT) import_ttf $< 14
+	$(MCUFONT) filter $@ $(CHARS)
+	$(MCUFONT) rlefont_optimize $@ 50
+
+verdana25.dat: verdana.ttf
+	$(MCUFONT) import_ttf $< 25
 	$(MCUFONT) filter $@ $(CHARS)
 	$(MCUFONT) rlefont_optimize $@ 50
 
