@@ -5,6 +5,7 @@ MCUFONT = ../encoder/mcufont
 FONTS = consolab15 \
 	consola10 consola15 consola20 consola25 consola30 consola40 \
 	cour13 cour14 \
+	fixed_5x8 fixed_7x14 fixed_10x20 \
 	verdana25
 
 # Characters to include in the fonts ' '..'~'
@@ -65,6 +66,9 @@ cour14.dat: cour.ttf
 	$(MCUFONT) import_ttf $< 14
 	$(MCUFONT) filter $@ $(CHARS)
 	$(MCUFONT) rlefont_optimize $@ 50
+
+fixed_5x8.c: fixed_5x8.dat $(MCUFONT)
+	$(MCUFONT) bwfont_export $<
 
 verdana25.dat: verdana.ttf
 	$(MCUFONT) import_ttf $< 25
